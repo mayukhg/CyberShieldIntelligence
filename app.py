@@ -9,7 +9,7 @@ import time
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
 from modules import user_behavior, incident_management, threat_intelligence
-from utils import data_processor, alerts, ml_models, rule_engine
+from utils import data_processor, alerts, ml_models, rule_engine, database
 
 # Configure page
 st.set_page_config(
@@ -24,6 +24,17 @@ if 'alerts_enabled' not in st.session_state:
     st.session_state.alerts_enabled = True
 if 'last_update' not in st.session_state:
     st.session_state.last_update = datetime.now()
+if 'db_initialized' not in st.session_state:
+    st.session_state.db_initialized = False
+
+# Initialize database and sample data on first run
+if not st.session_state.db_initialized:
+    try:
+        database.initialize_sample_data()
+        st.session_state.db_initialized = True
+    except Exception as e:
+        st.error(f"Database initialization error: {str(e)}")
+        st.info("The platform will run with limited functionality without database connectivity.")
 
 def main():
     st.title("🛡️ CyberShield AI Platform")
@@ -109,22 +120,29 @@ def dashboard_overview():
     
     st.divider()
     
-    # Recent alerts section
+    # Recent alerts section - Database Integration
     st.subheader("🚨 Recent Security Alerts")
-    recent_alerts = alerts.get_recent_alerts()
-    
-    if recent_alerts:
-        for alert in recent_alerts[:5]:  # Show last 5 alerts
-            severity_color = {
-                "HIGH": "🔴",
-                "MEDIUM": "🟡", 
-                "LOW": "🟢"
-            }.get(alert.get('severity', 'LOW'), '🔵')
+    try:
+        db = database.get_database()
+        recent_alerts = db.get_recent_alerts(hours=24, limit=5)
+        
+        if recent_alerts:
+            for alert in recent_alerts:
+                severity_color = {
+                    "CRITICAL": "🔥",
+                    "HIGH": "🔴",
+                    "MEDIUM": "🟡", 
+                    "LOW": "🟢"
+                }.get(alert.get('severity', 'LOW'), '🔵')
+                
+                st.write(f"{severity_color} **{alert.get('title', 'Unknown Alert')}** - {alert.get('created_at', 'Unknown time')}")
+                st.write(f"   {alert.get('description', 'No description available')}")
+        else:
+            st.info("No recent security alerts. System is operating normally.")
             
-            st.write(f"{severity_color} **{alert.get('title', 'Unknown Alert')}** - {alert.get('timestamp', 'Unknown time')}")
-            st.write(f"   {alert.get('description', 'No description available')}")
-    else:
-        st.info("No recent security alerts. System is operating normally.")
+    except Exception as e:
+        st.warning("Using offline mode - database connectivity issue")
+        st.info("No recent security alerts available in offline mode.")
     
     st.divider()
     

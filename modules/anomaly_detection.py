@@ -1,18 +1,46 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
-from sklearn.ensemble import IsolationForest
-from sklearn.preprocessing import StandardScaler
-from utils import ml_models
+"""
+Anomaly Detection Module for CyberShield AI Platform
+
+This module implements advanced machine learning algorithms to identify unusual patterns
+and behaviors that may indicate security threats. It uses statistical analysis and
+unsupervised learning to detect anomalies that traditional signature-based systems might miss.
+
+Key Features:
+- Multiple anomaly detection algorithms (Isolation Forest, Statistical Analysis)
+- Real-time anomaly scoring with confidence levels
+- Interactive anomaly investigation and drill-down capabilities
+- Automated baseline learning and threshold adjustment
+- Integration with threat intelligence for context-aware detection
+"""
+
+import streamlit as st              # Web interface framework for anomaly dashboards
+import pandas as pd                 # Data manipulation for anomaly analysis
+import numpy as np                  # Numerical computing for statistical algorithms
+import plotly.express as px         # Statistical visualization for anomaly patterns
+import plotly.graph_objects as go   # Advanced plotting for anomaly correlation
+from datetime import datetime, timedelta  # Time handling for anomaly timeline analysis
+
+# Machine Learning libraries for anomaly detection
+from sklearn.ensemble import IsolationForest    # Unsupervised anomaly detection algorithm
+from sklearn.preprocessing import StandardScaler # Feature scaling for consistent analysis
+from utils import ml_models         # Internal ML utilities for model management
 
 def show_anomaly_analysis():
-    """Anomaly detection module with machine learning"""
+    """
+    Main anomaly detection interface for security analysts.
+    
+    This function provides an interactive dashboard for:
+    - Monitoring anomaly detection performance metrics
+    - Configuring detection sensitivity and algorithms
+    - Investigating detected anomalies with detailed analysis
+    - Tracking historical anomaly patterns and trends
+    - Managing false positives and model tuning
+    """
+    # Main header for the anomaly detection module
     st.header("🔬 AI Anomaly Detection & Analysis")
     
-    # Anomaly detection metrics
+    # Create four-column layout for key anomaly detection metrics
+    # These provide real-time visibility into detection performance
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:

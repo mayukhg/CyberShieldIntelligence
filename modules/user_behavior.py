@@ -1,9 +1,25 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
+"""
+User Behavior Analytics Module for CyberShield AI Platform
+
+This module implements advanced behavioral analysis to detect insider threats and
+anomalous user activities. It uses machine learning to establish baseline user
+patterns and identifies deviations that may indicate compromised accounts or malicious insiders.
+
+Key Features:
+- Continuous user behavior monitoring and baseline establishment
+- Insider threat detection through behavioral pattern analysis
+- Risk scoring based on multiple behavioral indicators
+- Login pattern analysis with geographic and temporal correlation
+- Data access monitoring and privilege escalation detection
+- Compliance monitoring for regulatory requirements
+"""
+
+import streamlit as st              # Web interface framework for behavior dashboards
+import pandas as pd                 # Data manipulation for user activity analysis
+import numpy as np                  # Numerical computing for behavioral scoring algorithms
+import plotly.express as px         # Statistical visualization for behavior patterns
+import plotly.graph_objects as go   # Advanced plotting for user activity heatmaps
+from datetime import datetime, timedelta  # Time handling for behavioral timeline analysis
 
 def show_user_behavior():
     """User behavior analytics for insider threat detection"""

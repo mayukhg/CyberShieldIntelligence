@@ -1,16 +1,42 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
-from utils import ml_models, rule_engine
+"""
+Core Threat Detection Module for CyberShield AI Platform
+
+This module provides AI-powered threat identification and analysis capabilities.
+It serves as the primary interface for security analysts to monitor, detect, and investigate
+potential security threats across the network infrastructure.
+
+Key Features:
+- Real-time threat monitoring with live metrics
+- AI-powered threat classification and scoring
+- Interactive threat investigation workflows
+- Automated threat response recommendations
+- Integration with machine learning models for advanced detection
+"""
+
+import streamlit as st              # Web interface framework for security dashboards
+import pandas as pd                 # Data manipulation for threat analysis
+import numpy as np                  # Numerical computing for threat scoring algorithms
+import plotly.express as px         # Statistical visualization for threat trends
+import plotly.graph_objects as go   # Advanced plotting for threat correlation analysis
+from datetime import datetime, timedelta  # Time handling for threat timeline analysis
+from utils import ml_models, rule_engine   # Internal utilities for ML models and security rules
 
 def show_threat_detection():
-    """Threat detection module with AI-powered analysis"""
+    """
+    Main threat detection interface for security analysts.
+    
+    This function creates an interactive dashboard that provides:
+    - Real-time threat metrics and status indicators
+    - Threat detection controls and configuration options
+    - Live threat feed with detailed analysis capabilities
+    - Historical trend analysis and pattern recognition
+    - Automated threat response and mitigation recommendations
+    """
+    # Main header with security-focused branding
     st.header("🔍 AI-Powered Threat Detection")
     
-    # Real-time threat status
+    # Create three-column layout for key threat metrics
+    # These provide immediate visibility into current security status
     col1, col2, col3 = st.columns(3)
     
     with col1:

@@ -1,15 +1,42 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
+"""
+Network Analysis Module for CyberShield AI Platform
+
+This module provides comprehensive network traffic monitoring and security analysis.
+It combines real-time traffic analysis with geographic threat mapping to identify
+suspicious network activities, unauthorized connections, and potential security breaches.
+
+Key Features:
+- Real-time network traffic monitoring and analysis
+- Geographic visualization of threat origins and destinations
+- Suspicious connection detection with risk scoring
+- Network performance monitoring and bandwidth analysis
+- Protocol analysis and deep packet inspection capabilities
+- Firewall rule management and DDoS protection status
+"""
+
+import streamlit as st              # Web interface framework for network dashboards
+import pandas as pd                 # Data manipulation for network traffic analysis
+import numpy as np                  # Numerical computing for traffic pattern analysis
+import plotly.express as px         # Statistical visualization for network metrics
+import plotly.graph_objects as go   # Advanced plotting for geographic threat mapping
+from datetime import datetime, timedelta  # Time handling for traffic correlation
 
 def show_network_analysis():
-    """Network traffic analysis and monitoring"""
+    """
+    Main network analysis interface for security monitoring.
+    
+    This function provides comprehensive network monitoring capabilities:
+    - Real-time traffic metrics and bandwidth utilization
+    - Suspicious connection detection and geographic threat mapping
+    - Network performance analysis and protocol breakdown
+    - Firewall rule management and security policy enforcement
+    - DDoS protection status and attack mitigation monitoring
+    """
+    # Main header for the network analysis module
     st.header("🌐 Network Traffic Analysis & Monitoring")
     
-    # Network metrics overview
+    # Create four-column layout for key network security metrics
+    # These provide real-time visibility into network health and threats
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:

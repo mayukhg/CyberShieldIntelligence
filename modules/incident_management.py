@@ -1,15 +1,42 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
+"""
+Incident Management Module for CyberShield AI Platform
+
+This module provides comprehensive security incident lifecycle management from detection
+through resolution. It automates incident workflows, tracks response times, and ensures
+proper documentation and escalation procedures are followed.
+
+Key Features:
+- Complete incident lifecycle management (creation, tracking, resolution)
+- Automated workflow orchestration with customizable playbooks
+- Real-time incident status tracking and performance metrics
+- Escalation management with automated notifications
+- Collaborative incident response with team assignments
+- Comprehensive audit trails and compliance reporting
+"""
+
+import streamlit as st              # Web interface framework for incident dashboards
+import pandas as pd                 # Data manipulation for incident analytics
+import numpy as np                  # Numerical computing for metrics calculation
+import plotly.express as px         # Statistical visualization for incident trends
+import plotly.graph_objects as go   # Advanced plotting for incident timelines
+from datetime import datetime, timedelta  # Time handling for incident tracking
 
 def show_incident_management():
-    """Security incident management and response"""
+    """
+    Main incident management interface for security operations teams.
+    
+    This function provides comprehensive incident management capabilities:
+    - Real-time incident metrics and performance indicators
+    - Incident creation with automated workflow assignment
+    - Active incident monitoring and status tracking
+    - Response team coordination and task assignment
+    - Performance analytics and trend analysis
+    """
+    # Main header for the incident management module
     st.header("🚨 Security Incident Management & Response")
     
-    # Incident metrics overview
+    # Create four-column layout for key incident management metrics
+    # These provide real-time visibility into incident response performance
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:

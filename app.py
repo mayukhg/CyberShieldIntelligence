@@ -9,7 +9,7 @@ import time
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
 from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot
-from utils import data_processor, alerts, ml_models, rule_engine, database
+from utils import data_processor, alerts, ml_models, rule_engine, database, ui_themes
 
 # Configure page
 st.set_page_config(
@@ -37,11 +37,18 @@ if not st.session_state.db_initialized:
         st.info("The platform will run with limited functionality without database connectivity.")
 
 def main():
+    # Initialize adaptive theme system
+    theme_manager = ui_themes.apply_adaptive_theme()
+    
     st.title("🛡️ CyberShield AI Platform")
     st.markdown("AI-Powered Cybersecurity Monitoring and Threat Detection")
     
-    # Sidebar navigation
+    # Show current threat level indicator
+    ui_themes.show_threat_status()
+    
+    # Sidebar navigation with threat status
     st.sidebar.title("Navigation")
+    theme_manager.show_sidebar_threat_status()
     page = st.sidebar.selectbox(
         "Select Module",
         [

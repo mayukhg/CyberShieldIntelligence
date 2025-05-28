@@ -1,111 +1,197 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from datetime import datetime, timedelta
-import time
+"""
+CyberShield AI Platform - Main Application Entry Point
 
-# Import custom modules
+This is the central Streamlit application that orchestrates all cybersecurity modules.
+It provides a unified interface for threat detection, incident management, and security operations.
+
+Key Features:
+- Adaptive UI that changes colors based on threat levels
+- Real-time security monitoring and analytics  
+- AI-powered threat detection and response
+- Gamified security awareness training
+- Comprehensive incident management workflows
+"""
+
+# Core libraries for data science and web interface
+import streamlit as st          # Web application framework
+import pandas as pd             # Data manipulation and analysis
+import numpy as np              # Numerical computing
+import plotly.express as px     # Statistical visualization
+import plotly.graph_objects as go  # Advanced plotting
+from datetime import datetime, timedelta  # Date/time handling
+import time                     # Time utilities for real-time updates
+
+# Import cybersecurity modules - each handles a specific security domain
 from modules import threat_detection, anomaly_detection, network_analysis
 from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot, deep_learning_detection
+
+# Import utility modules for shared infrastructure and UI components
 from utils import data_processor, alerts, ml_models, rule_engine, database, ui_themes
 
-# Configure page
+# Configure Streamlit page with cybersecurity branding and optimal layout
 st.set_page_config(
-    page_title="CyberShield AI Platform",
-    page_icon="🛡️",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_title="CyberShield AI Platform",  # Browser tab title
+    page_icon="🛡️",                        # Shield icon representing security
+    layout="wide",                          # Use full screen width for dashboards
+    initial_sidebar_state="expanded"        # Start with sidebar open for navigation
 )
 
-# Initialize session state
+# Initialize session state variables to maintain application state across page interactions
+# Session state persists user settings and system status throughout the browser session
 if 'alerts_enabled' not in st.session_state:
-    st.session_state.alerts_enabled = True
-if 'last_update' not in st.session_state:
-    st.session_state.last_update = datetime.now()
-if 'db_initialized' not in st.session_state:
-    st.session_state.db_initialized = False
+    st.session_state.alerts_enabled = True  # Enable real-time security alerts by default
 
-# Initialize database and sample data on first run
+if 'last_update' not in st.session_state:
+    st.session_state.last_update = datetime.now()  # Track when data was last refreshed
+
+if 'db_initialized' not in st.session_state:
+    st.session_state.db_initialized = False  # Flag to ensure database setup runs only once
+
+# Initialize database connection and populate with security data on first run
+# This creates the PostgreSQL schema and adds sample security events for demonstration
 if not st.session_state.db_initialized:
     try:
+        # Set up database tables and load initial security data (alerts, incidents, IOCs)
         database.initialize_sample_data()
-        st.session_state.db_initialized = True
+        st.session_state.db_initialized = True  # Mark as successfully initialized
     except Exception as e:
+        # Graceful degradation if database connection fails
         st.error(f"Database initialization error: {str(e)}")
         st.info("The platform will run with limited functionality without database connectivity.")
 
 def main():
-    # Initialize adaptive theme system
+    """
+    Main application function that handles the user interface and navigation.
+    
+    This function:
+    1. Sets up the adaptive theme system that changes colors based on threat levels
+    2. Creates the main header and navigation
+    3. Routes users to different security modules based on their selection
+    4. Displays real-time threat status indicators
+    """
+    
+    # Initialize the adaptive theme system that changes UI colors based on current threat level
+    # Green = Low threat, Orange = Moderate, Red = High, Dark Red = Critical
     theme_manager = ui_themes.apply_adaptive_theme()
     
+    # Main application header with security branding
     st.title("🛡️ CyberShield AI Platform")
     st.markdown("AI-Powered Cybersecurity Monitoring and Threat Detection")
     
-    # Show current threat level indicator
+    # Display current threat level with color-coded indicator in the main area
+    # This gives users immediate visual feedback about the security status
     ui_themes.show_threat_status()
     
-    # Sidebar navigation with threat status
+    # Create sidebar navigation menu for accessing different security modules
     st.sidebar.title("Navigation")
+    
+    # Show threat status indicator in sidebar for constant visibility
     theme_manager.show_sidebar_threat_status()
+    
+    # Module selection dropdown - organizes all security functionality into logical categories
     page = st.sidebar.selectbox(
         "Select Module",
         [
-            "Dashboard",
-            "Threat Detection",
-            "Deep Learning Detection",
-            "Threat Timeline",
-            "Anomaly Analysis",
-            "Network Analysis",
-            "User Behavior Analytics",
-            "Incident Management",
-            "Threat Intelligence",
-            "Security Awareness",
-            "AI Security Assistant",
-            "Wiz Integration",
-            "System Settings"
+            "Dashboard",                    # Main overview with key metrics and alerts
+            "Threat Detection",             # AI-powered threat identification and analysis
+            "Deep Learning Detection",      # Advanced ML models (Neural Networks, SVM, etc.)
+            "Threat Timeline",              # Interactive timeline visualization with micro-interactions
+            "Anomaly Analysis",             # Statistical and ML-based anomaly detection
+            "Network Analysis",             # Network traffic monitoring and geographic analysis
+            "User Behavior Analytics",      # Insider threat detection through behavioral analysis
+            "Incident Management",          # Complete incident lifecycle management
+            "Threat Intelligence",          # IOC tracking and threat feed integration
+            "Security Awareness",           # Gamified training platform with achievements
+            "AI Security Assistant",        # OpenAI-powered security guidance chatbot
+            "Wiz Integration",              # Cloud security platform integration
+            "System Settings"               # Platform configuration and preferences
         ]
     )
     
-    # Main dashboard overview
+    # Route user to selected module - each module is self-contained with its own interface
+    # This modular approach allows independent development and testing of each security domain
+    
     if page == "Dashboard":
+        # Main overview dashboard with real-time security metrics and status
         dashboard_overview()
+        
     elif page == "Threat Detection":
+        # Core AI-powered threat identification with confidence scoring
         threat_detection.show_threat_detection()
+        
     elif page == "Deep Learning Detection":
+        # Advanced machine learning models for sophisticated threat detection
+        # Includes Neural Networks, Isolation Forest, Random Forest, and SVM models
         deep_learning_detection.show_deep_learning_detection()
+        
     elif page == "Threat Timeline":
+        # Interactive timeline with smooth animations and micro-interactions
+        # Provides chronological view of security events with filtering capabilities
         threat_timeline.show_threat_timeline()
+        
     elif page == "Anomaly Analysis":
+        # Statistical and machine learning based anomaly detection
+        # Identifies unusual patterns that may indicate security threats
         anomaly_detection.show_anomaly_analysis()
+        
     elif page == "Network Analysis":
+        # Network traffic monitoring, analysis, and geographic threat mapping
         network_analysis.show_network_analysis()
     elif page == "User Behavior Analytics":
+        # Insider threat detection through behavioral pattern analysis
+        # Monitors user activities to identify potential internal security risks
         user_behavior.show_user_behavior()
+        
     elif page == "Incident Management":
+        # Complete incident lifecycle management with automated workflows
+        # Handles creation, tracking, escalation, and resolution of security incidents
         incident_management.show_incident_management()
+        
     elif page == "Threat Intelligence":
+        # IOC (Indicators of Compromise) tracking and threat feed integration
+        # Aggregates intelligence from multiple sources for proactive threat hunting
         threat_intelligence.show_threat_intelligence()
+        
     elif page == "Security Awareness":
+        # Gamified security training platform with achievements and leaderboards
+        # Engages users through interactive challenges and progress tracking
         security_awareness.show_security_awareness()
+        
     elif page == "AI Security Assistant":
+        # OpenAI-powered security guidance chatbot with contextual recommendations
+        # Provides intelligent assistance for security questions and incident response
         security_chatbot.show_security_chatbot()
+        
     elif page == "Wiz Integration":
+        # Cloud security platform integration for comprehensive coverage
+        # Connects with Wiz to monitor cloud infrastructure and compliance
         wiz_integration.show_wiz_integration()
+        
     elif page == "System Settings":
+        # Platform configuration, preferences, and administrative functions
         system_settings()
 
 def dashboard_overview():
-    """Main dashboard with real-time security metrics"""
+    """
+    Main dashboard displaying real-time security metrics and system status.
     
-    # Auto-refresh functionality
+    This central command center provides:
+    - Key performance indicators (KPIs) for security operations
+    - Real-time threat level monitoring
+    - Active incident tracking
+    - System health and performance metrics
+    - Quick access to critical alerts and recent activity
+    """
+    
+    # Auto-refresh functionality for real-time monitoring
+    # Allows dashboard to automatically update every 30 seconds for live data
     auto_refresh = st.sidebar.checkbox("Auto Refresh (30s)", value=False)
     if auto_refresh:
-        time.sleep(30)
-        st.rerun()
+        time.sleep(30)  # Wait 30 seconds before refreshing
+        st.rerun()      # Trigger Streamlit page refresh
     
-    # Real-time metrics
+    # Create a 4-column layout for key security metrics
+    # This provides at-a-glance visibility into critical security indicators
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:

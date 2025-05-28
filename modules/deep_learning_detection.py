@@ -22,22 +22,45 @@ from typing import Dict, List, Tuple, Any
 import random
 
 class DeepLearningThreatDetector:
-    """Advanced deep learning models for threat detection"""
+    """
+    Advanced machine learning threat detection system with multiple specialized models.
+    
+    This class orchestrates four different AI models, each optimized for specific security threats:
+    1. Neural Network - Sophisticated malware pattern recognition
+    2. Isolation Forest - Unsupervised anomaly detection in network traffic
+    3. Random Forest - Multi-class threat classification with high accuracy
+    4. SVM - Behavioral analysis for insider threat detection
+    
+    Each model includes:
+    - Automated feature preprocessing and scaling
+    - Real-time prediction capabilities with confidence scoring
+    - Performance monitoring and metrics tracking
+    - Training history and model versioning
+    """
     
     def __init__(self):
-        self.models = {}
-        self.scalers = {}
-        self.encoders = {}
-        self.model_metrics = {}
-        self.training_history = {}
+        """Initialize the threat detection system with empty model containers."""
+        # Core model storage - each model handles a different threat type
+        self.models = {}           # Trained ML models (Neural Network, Random Forest, etc.)
+        self.scalers = {}          # Feature scaling transformers for consistent input normalization
+        self.encoders = {}         # Label encoders for categorical data conversion
+        self.model_metrics = {}    # Performance metrics (accuracy, precision, recall, F1)
+        self.training_history = {} # Historical training data for trend analysis
         
     def load_or_create_models(self):
-        """Load existing models or create new ones"""
+        """
+        Initialize all four specialized threat detection models.
+        
+        In a production environment, this would load pre-trained models from disk.
+        For demonstration, it creates new models with optimized hyperparameters.
+        Each model is specifically tuned for its threat detection domain.
+        """
         try:
-            # In production, these would be loaded from saved model files
+            # Create the complete threat detection model suite
+            # Each model is specialized for different types of security threats
             self.models = {
-                'malware_detector': self.create_malware_detection_model(),
-                'network_anomaly': self.create_network_anomaly_model(),
+                'malware_detector': self.create_malware_detection_model(),     # Neural network for malware patterns
+                'network_anomaly': self.create_network_anomaly_model(),        # Isolation forest for network anomalies
                 'threat_classifier': self.create_threat_classification_model(),
                 'behavioral_analysis': self.create_behavioral_analysis_model()
             }

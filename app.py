@@ -8,7 +8,7 @@ import time
 
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
-from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot
+from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot, deep_learning_detection
 from utils import data_processor, alerts, ml_models, rule_engine, database, ui_themes
 
 # Configure page
@@ -54,6 +54,7 @@ def main():
         [
             "Dashboard",
             "Threat Detection",
+            "Deep Learning Detection",
             "Threat Timeline",
             "Anomaly Analysis",
             "Network Analysis",
@@ -72,6 +73,8 @@ def main():
         dashboard_overview()
     elif page == "Threat Detection":
         threat_detection.show_threat_detection()
+    elif page == "Deep Learning Detection":
+        deep_learning_detection.show_deep_learning_detection()
     elif page == "Threat Timeline":
         threat_timeline.show_threat_timeline()
     elif page == "Anomaly Analysis":

@@ -13,6 +13,7 @@ An advanced AI-powered cybersecurity monitoring and threat detection platform bu
 - **User Behavior Analytics**: Insider threat detection through behavioral pattern analysis
 - **Incident Management**: Complete incident response workflow with automated escalation
 - **Threat Intelligence**: External threat feed integration with IOC tracking and campaign analysis
+- **Wiz Platform Integration**: Direct connectivity to Wiz Security Platform for comprehensive cloud security monitoring
 
 ### 🤖 AI & Machine Learning Capabilities
 
@@ -42,7 +43,8 @@ cybershield-ai/
 │   ├── network_analysis.py     # Network traffic monitoring
 │   ├── user_behavior.py        # User behavior analytics
 │   ├── incident_management.py  # Incident response system
-│   └── threat_intelligence.py  # Threat intelligence feeds
+│   ├── threat_intelligence.py  # Threat intelligence feeds
+│   └── wiz_integration.py      # Wiz Security Platform integration
 ├── utils/                  # Utility modules
 │   ├── alerts.py               # Alert management system
 │   ├── data_processor.py       # Security data processing
@@ -56,6 +58,8 @@ cybershield-ai/
 
 - **Frontend**: Streamlit for interactive web interface
 - **Backend**: Python with advanced security libraries
+- **Database**: PostgreSQL for persistent security data storage
+- **Cloud Integration**: Wiz Security Platform API connectivity
 - **Machine Learning**: scikit-learn, NumPy, pandas
 - **Visualization**: Plotly for interactive charts and dashboards
 - **Data Processing**: Pandas for security event processing
@@ -140,6 +144,14 @@ cybershield-ai/
 - **Vulnerability Intelligence**: CVE tracking and exploitation monitoring
 - **Threat Hunting**: Proactive threat search capabilities
 
+### 8. Wiz Integration
+- **Cloud Security Dashboard**: Comprehensive overview of cloud security posture
+- **Security Issues**: Real-time detection of cloud security issues and misconfigurations
+- **Vulnerability Management**: Automated vulnerability scanning and prioritization across cloud assets
+- **Cloud Asset Inventory**: Complete visibility into cloud resources across AWS, Azure, GCP
+- **Compliance Monitoring**: Continuous compliance tracking for SOC2, ISO27001, PCI-DSS, HIPAA, GDPR, and NIST frameworks
+- **Data Synchronization**: Automatic import of Wiz findings into CyberShield database for unified analysis
+
 ## 🔧 Configuration
 
 ### Alert Configuration
@@ -156,6 +168,28 @@ cybershield-ai/
 - **Log Integration**: Support for syslog, JSON, CSV, and custom formats
 - **Network Monitoring**: PCAP analysis and flow-based monitoring
 - **System Integration**: Active Directory, SIEM, and security tool integration
+
+### Wiz Integration Setup
+To connect your Wiz Security Platform account:
+
+1. **Obtain Wiz API Credentials**:
+   - Log in to your Wiz console
+   - Navigate to Settings > Service Accounts
+   - Create a new service account with appropriate permissions
+   - Copy the Client ID and Client Secret
+
+2. **Configure in CyberShield**:
+   - Go to the "Wiz Integration" module in CyberShield
+   - Enter your Wiz Client ID and Client Secret
+   - Click "Test Connection" to verify connectivity
+   - Once connected, data will automatically sync
+
+3. **Available Data Sources**:
+   - **Security Issues**: Cloud misconfigurations and security findings
+   - **Vulnerabilities**: CVEs and security vulnerabilities across cloud assets
+   - **Cloud Assets**: Complete inventory of cloud resources
+   - **Compliance Findings**: Compliance status across multiple frameworks
+   - **Real-time Sync**: Automatic data synchronization every 15 minutes
 
 ## 🔒 Security Features
 

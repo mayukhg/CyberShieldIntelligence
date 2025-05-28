@@ -8,7 +8,7 @@ import time
 
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
-from modules import user_behavior, incident_management, threat_intelligence, wiz_integration
+from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline
 from utils import data_processor, alerts, ml_models, rule_engine, database
 
 # Configure page

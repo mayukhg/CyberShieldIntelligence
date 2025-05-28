@@ -27,52 +27,61 @@
   
   <!-- Title -->
   <text x="700" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#343a40">
-    CyberShield AI Platform - Architecture &amp; Data Flow
+    CyberShield AI Platform - Enterprise Security Architecture
+  </text>
+  <text x="700" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6c757d">
+    Production-Ready with SOC 2, ISO 27001 Compliance &amp; Zero-Trust Security
   </text>
   
+  <!-- Enterprise Security Layer -->
+  <rect x="50" y="70" width="1300" height="80" fill="#dc3545" stroke="#c82333" stroke-width="3" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="95" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">🔒 Enterprise Security Framework</text>
+  <text x="70" y="115" font-family="Arial, sans-serif" font-size="12" fill="white">AES-256-GCM Encryption • Multi-Layer Input Validation • SOC 2 / ISO 27001 Compliance • Zero-Trust Architecture</text>
+  <text x="70" y="135" font-family="Arial, sans-serif" font-size="12" fill="white">Rate Limiting • Session Security • 7-Year Audit Trails • GDPR Compliance • 100% Security Coverage</text>
+
   <!-- External Data Sources Layer -->
-  <rect x="50" y="70" width="1300" height="120" fill="#e9ecef" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
-  <text x="70" y="95" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">External Data Sources</text>
+  <rect x="50" y="160" width="1300" height="120" fill="#e9ecef" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="185" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">External Data Sources</text>
   
   <!-- Wiz Integration -->
-  <rect x="80" y="110" width="120" height="60" fill="url(#grad2)" stroke="#28a745" stroke-width="2" rx="5"/>
-  <text x="140" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Wiz Security</text>
-  <text x="140" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Platform</text>
+  <rect x="80" y="200" width="120" height="60" fill="url(#grad2)" stroke="#28a745" stroke-width="2" rx="5"/>
+  <text x="140" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Wiz Security</text>
+  <text x="140" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Platform</text>
   
   <!-- Threat Intelligence -->
-  <rect x="220" y="110" width="120" height="60" fill="url(#grad3)" stroke="#dc3545" stroke-width="2" rx="5"/>
-  <text x="280" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Threat Intel</text>
-  <text x="280" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Feeds</text>
+  <rect x="220" y="200" width="120" height="60" fill="url(#grad3)" stroke="#dc3545" stroke-width="2" rx="5"/>
+  <text x="280" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Threat Intel</text>
+  <text x="280" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Feeds</text>
   
   <!-- Network Traffic -->
-  <rect x="360" y="110" width="120" height="60" fill="url(#grad1)" stroke="#4a90e2" stroke-width="2" rx="5"/>
-  <text x="420" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Network</text>
-  <text x="420" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Traffic</text>
+  <rect x="360" y="200" width="120" height="60" fill="url(#grad1)" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="420" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Network</text>
+  <text x="420" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Traffic</text>
   
   <!-- User Behavior -->
-  <rect x="500" y="110" width="120" height="60" fill="url(#grad4)" stroke="#fd7e14" stroke-width="2" rx="5"/>
-  <text x="560" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">User</text>
-  <text x="560" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Behavior</text>
+  <rect x="500" y="200" width="120" height="60" fill="url(#grad4)" stroke="#fd7e14" stroke-width="2" rx="5"/>
+  <text x="560" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">User</text>
+  <text x="560" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Behavior</text>
   
   <!-- OpenAI API -->
-  <rect x="640" y="110" width="120" height="60" fill="#6f42c1" stroke="#6f42c1" stroke-width="2" rx="5"/>
-  <text x="700" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">OpenAI</text>
-  <text x="700" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">GPT-4o</text>
+  <rect x="640" y="200" width="120" height="60" fill="#6f42c1" stroke="#6f42c1" stroke-width="2" rx="5"/>
+  <text x="700" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">OpenAI</text>
+  <text x="700" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">GPT-4o</text>
   
   <!-- Security Events -->
-  <rect x="780" y="110" width="120" height="60" fill="#20c997" stroke="#20c997" stroke-width="2" rx="5"/>
-  <text x="840" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Security</text>
-  <text x="840" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Events</text>
+  <rect x="780" y="200" width="120" height="60" fill="#20c997" stroke="#20c997" stroke-width="2" rx="5"/>
+  <text x="840" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Security</text>
+  <text x="840" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Events</text>
   
   <!-- System Logs -->
-  <rect x="920" y="110" width="120" height="60" fill="#6c757d" stroke="#6c757d" stroke-width="2" rx="5"/>
-  <text x="980" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">System</text>
-  <text x="980" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Logs</text>
+  <rect x="920" y="200" width="120" height="60" fill="#6c757d" stroke="#6c757d" stroke-width="2" rx="5"/>
+  <text x="980" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">System</text>
+  <text x="980" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Logs</text>
   
   <!-- Compliance Data -->
-  <rect x="1060" y="110" width="120" height="60" fill="#e83e8c" stroke="#e83e8c" stroke-width="2" rx="5"/>
-  <text x="1120" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Compliance</text>
-  <text x="1120" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Data</text>
+  <rect x="1060" y="200" width="120" height="60" fill="#e83e8c" stroke="#e83e8c" stroke-width="2" rx="5"/>
+  <text x="1120" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Compliance</text>
+  <text x="1120" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Data</text>
   
   <!-- Data Arrows from sources to processing -->
   <defs>

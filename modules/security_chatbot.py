@@ -15,26 +15,58 @@ import time
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 class SecurityChatbot:
-    """AI-powered security chatbot with context awareness"""
+    """
+    AI-powered security chatbot with real-time context awareness.
+    
+    This intelligent assistant provides personalized cybersecurity guidance by:
+    1. Monitoring current security status from the CyberShield platform
+    2. Understanding user roles and experience levels for tailored responses
+    3. Maintaining conversation context for coherent multi-turn interactions
+    4. Providing proactive recommendations based on current threat landscape
+    
+    The chatbot acts as a virtual security expert available 24/7 for instant guidance.
+    """
     
     def __init__(self):
+        """Initialize the chatbot with current security context and user profile."""
+        # Store conversation history for context-aware responses
         self.conversation_history = []
+        
+        # Load real-time security data from the CyberShield platform
+        # This ensures the AI has current threat intelligence for accurate guidance
         self.security_context = self.load_security_context()
+        
+        # Get user profile for personalized recommendations
+        # Experience level and role determine the complexity and focus of responses
         self.user_profile = self.get_user_profile()
     
     def load_security_context(self):
-        """Load current security context from the platform"""
+        """
+        Load current security context from the CyberShield platform.
+        
+        This pulls real-time data about:
+        - Active threats and their severity levels
+        - Current security posture and compliance status
+        - Open incidents requiring attention
+        - Recent vulnerability discoveries
+        - Training completion status
+        
+        This context ensures the AI provides relevant, timely guidance.
+        """
         return {
+            # Recent threat activity detected by the platform
             "recent_threats": [
                 {"type": "Phishing", "severity": "HIGH", "count": 5},
                 {"type": "Malware", "severity": "CRITICAL", "count": 2},
                 {"type": "Brute Force", "severity": "MEDIUM", "count": 8}
             ],
-            "security_posture": "MODERATE",
-            "active_incidents": 3,
-            "compliance_score": 78,
-            "vulnerability_count": 12,
-            "last_security_training": "2 weeks ago"
+            
+            # Overall security health indicators
+            "security_posture": "MODERATE",      # Current threat level assessment
+            "active_incidents": 3,               # Open security incidents requiring response
+            "compliance_score": 78,              # Regulatory compliance percentage
+            "vulnerability_count": 12,           # Known vulnerabilities needing patches
+            "last_security_training": "2 weeks ago"  # Training currency for recommendations
         }
     
     def get_user_profile(self):

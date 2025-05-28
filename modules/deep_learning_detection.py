@@ -64,67 +64,36 @@ class DeepLearningThreatDetector:
         return model
     
     def create_network_anomaly_model(self):
-        """Create autoencoder for network anomaly detection"""
-        # Encoder
-        input_layer = layers.Input(shape=(20,))
-        encoded = layers.Dense(16, activation='relu')(input_layer)
-        encoded = layers.Dense(8, activation='relu')(encoded)
-        encoded = layers.Dense(4, activation='relu')(encoded)
-        
-        # Decoder
-        decoded = layers.Dense(8, activation='relu')(encoded)
-        decoded = layers.Dense(16, activation='relu')(decoded)
-        decoded = layers.Dense(20, activation='sigmoid')(decoded)
-        
-        autoencoder = keras.Model(input_layer, decoded)
-        autoencoder.compile(optimizer='adam', loss='mse')
-        
-        return autoencoder
+        """Create isolation forest for network anomaly detection"""
+        model = IsolationForest(
+            contamination=0.1,
+            random_state=42,
+            n_estimators=100
+        )
+        return model
     
     def create_threat_classification_model(self):
         """Create model for multi-class threat classification"""
-        model = keras.Sequential([
-            layers.Dense(128, activation='relu', input_shape=(30,)),
-            layers.BatchNormalization(),
-            layers.Dropout(0.4),
-            layers.Dense(64, activation='relu'),
-            layers.BatchNormalization(),
-            layers.Dropout(0.3),
-            layers.Dense(32, activation='relu'),
-            layers.Dropout(0.2),
-            layers.Dense(8, activation='softmax')  # 8 threat categories
-        ])
-        
-        model.compile(
-            optimizer='adam',
-            loss='sparse_categorical_crossentropy',
-            metrics=['accuracy']
+        model = RandomForestClassifier(
+            n_estimators=100,
+            max_depth=20,
+            random_state=42,
+            n_jobs=-1
         )
-        
         return model
     
     def create_behavioral_analysis_model(self):
-        """Create LSTM model for behavioral pattern analysis"""
-        model = keras.Sequential([
-            layers.LSTM(64, return_sequences=True, input_shape=(10, 15)),
-            layers.Dropout(0.3),
-            layers.LSTM(32, return_sequences=False),
-            layers.Dropout(0.3),
-            layers.Dense(16, activation='relu'),
-            layers.Dense(1, activation='sigmoid')
-        ])
-        
-        model.compile(
-            optimizer='adam',
-            loss='binary_crossentropy',
-            metrics=['accuracy']
+        """Create SVM model for behavioral pattern analysis"""
+        model = OneClassSVM(
+            kernel='rbf',
+            gamma='scale',
+            nu=0.1
         )
-        
         return model
     
     def generate_training_data(self, data_type: str, samples: int = 1000):
         """Generate realistic training data for different detection models"""
-        if data_type == 'malware':
+        if data_type == 'malware_detector' or data_type == 'malware':
             # Simulate file features: size, entropy, API calls, etc.
             features = np.random.rand(samples, 50)
             # Add patterns for malware vs benign
@@ -133,7 +102,7 @@ class DeepLearningThreatDetector:
             labels = np.zeros(samples)
             labels[malware_indices] = 1
             
-        elif data_type == 'network':
+        elif data_type == 'network_anomaly' or data_type == 'network':
             # Simulate network traffic features
             features = np.random.rand(samples, 20)
             # Normal traffic patterns
@@ -142,15 +111,20 @@ class DeepLearningThreatDetector:
             features[int(samples*0.9):] = np.random.normal(0.8, 0.3, (samples - int(samples*0.9), 20))
             labels = None  # Unsupervised learning
             
-        elif data_type == 'threat_classification':
+        elif data_type == 'threat_classifier' or data_type == 'threat_classification':
             # Simulate features for different threat types
             features = np.random.rand(samples, 30)
             labels = np.random.randint(0, 8, samples)  # 8 threat categories
             
-        elif data_type == 'behavioral':
-            # Simulate time series behavioral data
-            features = np.random.rand(samples, 10, 15)  # sequence_length=10, features=15
+        elif data_type == 'behavioral_analysis' or data_type == 'behavioral':
+            # Simulate behavioral data - flatten for sklearn models
+            features = np.random.rand(samples, 150)  # 10*15 features flattened
             labels = np.random.choice([0, 1], samples)
+        
+        else:
+            # Default case
+            features = np.random.rand(samples, 30)
+            labels = np.random.randint(0, 2, samples)
             
         return features, labels
     

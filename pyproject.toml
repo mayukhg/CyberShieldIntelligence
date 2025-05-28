@@ -6,6 +6,7 @@ requires-python = ">=3.11"
 dependencies = [
     "modules>=1.0.0",
     "numpy>=2.2.6",
+    "openai>=1.82.0",
     "pandas>=2.2.3",
     "plotly>=6.1.2",
     "psycopg2-binary>=2.9.10",

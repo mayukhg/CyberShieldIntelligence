@@ -8,7 +8,7 @@ import time
 
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
-from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness
+from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot
 from utils import data_processor, alerts, ml_models, rule_engine, database
 
 # Configure page
@@ -54,6 +54,7 @@ def main():
             "Incident Management",
             "Threat Intelligence",
             "Security Awareness",
+            "AI Security Assistant",
             "Wiz Integration",
             "System Settings"
         ]
@@ -78,6 +79,8 @@ def main():
         threat_intelligence.show_threat_intelligence()
     elif page == "Security Awareness":
         security_awareness.show_security_awareness()
+    elif page == "AI Security Assistant":
+        security_chatbot.show_security_chatbot()
     elif page == "Wiz Integration":
         wiz_integration.show_wiz_integration()
     elif page == "System Settings":

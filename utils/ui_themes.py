@@ -1,15 +1,35 @@
 """
-Adaptive UI Color Scheme Module
-Dynamic theme system that adapts based on security threat levels
+Adaptive UI Theme System for CyberShield AI Platform
+
+This module implements a dynamic visual feedback system that changes the entire interface
+colors based on current threat levels. It provides immediate visual cues to security teams
+about the organization's security posture without requiring them to read specific metrics.
+
+Key Features:
+- Real-time adaptive color schemes that reflect current threat levels
+- Four distinct threat level themes: Low (Green), Moderate (Orange), High (Red), Critical (Dark Red)
+- Consistent color application across all charts, metrics, and UI components
+- Smooth transitions between threat levels for professional appearance
+- Customizable threat level thresholds and color palettes
+- Emergency mode for critical security incidents
 """
 
-import streamlit as st
-from typing import Dict, Tuple, Any
-from datetime import datetime
-import random
+import streamlit as st              # Web interface framework for theme application
+from typing import Dict, Tuple, Any # Type hints for color scheme definitions
+from datetime import datetime      # Time-based theme evaluation
+import random                       # Demonstration data for threat level simulation
 
 class AdaptiveThemeManager:
-    """Manages adaptive UI themes based on threat levels"""
+    """
+    Manages dynamic UI themes that adapt based on real-time threat levels.
+    
+    This class creates a visual security operations center where colors immediately
+    communicate the current security status:
+    - Green themes indicate low threat levels and normal operations
+    - Orange themes signal moderate threats requiring attention
+    - Red themes warn of high threat situations needing immediate action
+    - Dark red themes indicate critical emergencies requiring all-hands response
+    """
     
     def __init__(self):
         self.current_threat_level = self.calculate_threat_level()

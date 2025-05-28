@@ -47,6 +47,7 @@ def main():
         [
             "Dashboard",
             "Threat Detection",
+            "Threat Timeline",
             "Anomaly Analysis",
             "Network Analysis",
             "User Behavior Analytics",
@@ -62,6 +63,8 @@ def main():
         dashboard_overview()
     elif page == "Threat Detection":
         threat_detection.show_threat_detection()
+    elif page == "Threat Timeline":
+        threat_timeline.show_threat_timeline()
     elif page == "Anomaly Analysis":
         anomaly_detection.show_anomaly_analysis()
     elif page == "Network Analysis":

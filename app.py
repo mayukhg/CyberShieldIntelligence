@@ -8,7 +8,7 @@ import time
 
 # Import custom modules
 from modules import threat_detection, anomaly_detection, network_analysis
-from modules import user_behavior, incident_management, threat_intelligence
+from modules import user_behavior, incident_management, threat_intelligence, wiz_integration
 from utils import data_processor, alerts, ml_models, rule_engine, database
 
 # Configure page
@@ -52,6 +52,7 @@ def main():
             "User Behavior Analytics",
             "Incident Management",
             "Threat Intelligence",
+            "Wiz Integration",
             "System Settings"
         ]
     )
@@ -71,6 +72,8 @@ def main():
         incident_management.show_incident_management()
     elif page == "Threat Intelligence":
         threat_intelligence.show_threat_intelligence()
+    elif page == "Wiz Integration":
+        wiz_integration.show_wiz_integration()
     elif page == "System Settings":
         system_settings()
 

@@ -1,0 +1,37 @@
+version: '3.8'
+
+# Development Docker Compose Configuration
+# This extends the main docker-compose.yml for development environment
+
+services:
+  cybershield-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - STREAMLIT_SERVER_FILE_WATCHER_TYPE=poll
+    ports:
+      - "5000:5000"
+      - "8501:8501"  # Alternative Streamlit port for debugging
+    command: streamlit run app.py --server.port 5000 --server.address 0.0.0.0 --server.runOnSave true --server.fileWatcherType poll
+
+  # Override database for development
+  postgres:
+    environment:
+      POSTGRES_DB: cybershield_dev
+      POSTGRES_USER: cybershield_dev
+      POSTGRES_PASSWORD: dev_password_2024
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_dev_data:
+    driver: local

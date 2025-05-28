@@ -300,7 +300,7 @@ def generate_ioc_data():
         elif ioc_type == 'URL':
             ioc = f"http://suspicious-{np.random.randint(1, 1000)}.com/malware.exe"
         elif ioc_type == 'File Hash':
-            ioc = ''.join(np.random.choice('0123456789abcdef', 64))
+            ioc = ''.join(np.random.choice(list('0123456789abcdef'), 64))
         else:  # Email
             ioc = f"phishing{np.random.randint(1, 100)}@malicious-domain.com"
         

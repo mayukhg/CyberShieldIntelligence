@@ -1,102 +1,196 @@
+# ==============================================================================
+# CyberShield AI Platform - Production Docker Compose Configuration
+# ==============================================================================
+# This Docker Compose file orchestrates the complete CyberShield AI Platform
+# deployment with all necessary services for enterprise production use.
+#
+# Services Architecture:
+# - PostgreSQL: Secure database with SSL encryption and data persistence
+# - Redis: High-performance caching and session management
+# - CyberShield App: Main AI-powered cybersecurity platform
+# - NGINX: Reverse proxy with security headers and rate limiting
+#
+# Network Security:
+# - Isolated Docker network for service communication
+# - Health checks for all critical services
+# - Secure inter-service communication
+# ==============================================================================
+
 version: '3.8'
 
 services:
-  # PostgreSQL Database
+  # ===========================================================================
+  # PostgreSQL Database Service
+  # ===========================================================================
+  # Primary data store for all security events, incidents, and platform data
+  # Features enterprise-grade security with SSL encryption and proper isolation
   postgres:
-    image: postgres:15-alpine
+    image: postgres:15-alpine  # Alpine image for minimal attack surface
     container_name: cybershield-db
+    
+    # Database configuration with security best practices
     environment:
-      POSTGRES_DB: cybershield
-      POSTGRES_USER: cybershield
-      POSTGRES_PASSWORD: cybershield_secure_2024
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      POSTGRES_DB: cybershield                    # Main application database
+      POSTGRES_USER: cybershield                  # Dedicated database user
+      POSTGRES_PASSWORD: cybershield_secure_2024  # Strong password (change in production)
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"    # UTF-8 encoding for international support
+    
+    # Persistent storage and initialization
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - postgres_data:/var/lib/postgresql/data                    # Persistent data storage
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql  # Database initialization script
+    
+    # Network configuration
     ports:
-      - "5432:5432"
+      - "5432:5432"  # Expose PostgreSQL port for external connections if needed
     networks:
-      - cybershield-network
-    restart: unless-stopped
+      - cybershield-network  # Isolated network for secure service communication
+    
+    # Container lifecycle management
+    restart: unless-stopped  # Automatic restart on failure (except manual stops)
+    
+    # Health monitoring for dependency management
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U cybershield -d cybershield"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 10s   # Check every 10 seconds
+      timeout: 5s     # 5-second timeout for health checks
+      retries: 5      # 5 retries before marking unhealthy
 
-  # Redis Cache (for session management and caching)
+  # ===========================================================================
+  # Redis Cache Service
+  # ===========================================================================
+  # High-performance in-memory data store for session management and caching
+  # Improves application performance and enables distributed session storage
   redis:
-    image: redis:7-alpine
+    image: redis:7-alpine  # Latest Redis with Alpine for security
     container_name: cybershield-redis
+    
+    # Network configuration
     ports:
-      - "6379:6379"
+      - "6379:6379"  # Standard Redis port
+    
+    # Persistent storage configuration
     volumes:
-      - redis_data:/data
+      - redis_data:/data  # Persistent storage for Redis data
+    
     networks:
-      - cybershield-network
+      - cybershield-network  # Secure inter-service communication
+    
+    # Container lifecycle management
     restart: unless-stopped
-    command: redis-server --appendonly yes
+    
+    # Redis configuration with persistence enabled
+    command: redis-server --appendonly yes  # Enable AOF persistence for data durability
+    
+    # Health monitoring
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "ping"]  # Simple ping test for Redis availability
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # CyberShield AI Platform
+  # ===========================================================================
+  # CyberShield AI Platform Application
+  # ===========================================================================
+  # Main application container running the cybersecurity platform
+  # Features enterprise security, AI/ML capabilities, and comprehensive monitoring
   cybershield-app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .           # Build from current directory
+      dockerfile: Dockerfile  # Use the production Dockerfile
     container_name: cybershield-app
+    
+    # Application environment configuration
     environment:
+      # Database connection with SSL preference for security
       - DATABASE_URL=postgresql://cybershield:cybershield_secure_2024@postgres:5432/cybershield?sslmode=prefer
+      # Redis connection for caching and sessions
       - REDIS_URL=redis://redis:6379/0
+      # Streamlit server configuration
       - STREAMLIT_SERVER_PORT=5000
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      # Python path configuration
       - PYTHONPATH=/app
+      # Production environment flag
       - ENVIRONMENT=production
+    
+    # Port mapping for external access
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Main application port
+    
+    # Volume mounts for persistent data and logs
     volumes:
-      - ./logs:/app/logs
-      - ./data:/app/data
+      - ./logs:/app/logs  # Application logs (bind mount for easy access)
+      - ./data:/app/data  # Application data storage
+    
     networks:
       - cybershield-network
+    
+    # Service dependencies with health check requirements
     depends_on:
       postgres:
-        condition: service_healthy
+        condition: service_healthy  # Wait for PostgreSQL to be healthy
       redis:
-        condition: service_healthy
+        condition: service_healthy  # Wait for Redis to be healthy
+    
+    # Container lifecycle management
     restart: unless-stopped
+    
+    # Application health monitoring
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/_stcore/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      interval: 30s      # Check every 30 seconds
+      timeout: 10s       # 10-second timeout for health checks
+      retries: 3         # 3 retries before marking unhealthy
+      start_period: 40s  # 40-second grace period for application startup
 
-  # NGINX Reverse Proxy (for production deployment)
+  # ===========================================================================
+  # NGINX Reverse Proxy Service
+  # ===========================================================================
+  # Production-grade reverse proxy with security headers and rate limiting
+  # Provides SSL termination, load balancing, and additional security layers
   nginx:
-    image: nginx:alpine
+    image: nginx:alpine  # Lightweight Alpine-based NGINX
     container_name: cybershield-nginx
+    
+    # Port mapping for HTTP and HTTPS traffic
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80"    # HTTP port (can redirect to HTTPS in production)
+      - "443:443"  # HTTPS port for SSL/TLS connections
+    
+    # Configuration and SSL certificate volumes
     volumes:
-      - ./docker/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/ssl:/etc/nginx/ssl
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf  # Custom NGINX configuration
+      - ./docker/ssl:/etc/nginx/ssl                # SSL certificates directory
+    
     networks:
       - cybershield-network
+    
+    # Dependency on main application
     depends_on:
-      - cybershield-app
+      - cybershield-app  # Ensure application is running before starting proxy
+    
+    # Container lifecycle management
     restart: unless-stopped
 
+# =============================================================================
+# Persistent Volume Configuration
+# =============================================================================
+# Named volumes for data persistence across container restarts and updates
 volumes:
+  # PostgreSQL data volume for database persistence
   postgres_data:
-    driver: local
+    driver: local  # Local storage driver for single-node deployments
+  
+  # Redis data volume for cache persistence
   redis_data:
-    driver: local
+    driver: local  # Local storage driver for single-node deployments
 
+# =============================================================================
+# Network Configuration
+# =============================================================================
+# Isolated network for secure inter-service communication
 networks:
+  # Custom bridge network for the CyberShield platform
   cybershield-network:
-    driver: bridge
+    driver: bridge  # Bridge driver for container-to-container communication

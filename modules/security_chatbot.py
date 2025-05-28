@@ -11,8 +11,23 @@ from typing import Dict, List, Any, Optional
 import json
 import time
 
-# Configure OpenAI
-client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+# SECURITY: Secure OpenAI API configuration with enhanced error handling
+try:
+    api_key = os.getenv('OPENAI_API_KEY')
+    if not api_key:
+        # SECURITY: Fail securely if API key is not configured
+        raise ValueError("OpenAI API key not configured")
+    
+    # SECURITY: Initialize OpenAI client with secure configuration
+    client = OpenAI(
+        api_key=api_key,
+        timeout=30.0,  # Prevent hanging requests
+        max_retries=2  # Limit retry attempts to prevent abuse
+    )
+except Exception as e:
+    # SECURITY: Handle API initialization errors gracefully
+    client = None
+    print(f"Warning: OpenAI API not available - {type(e).__name__}")
 
 class SecurityChatbot:
     """

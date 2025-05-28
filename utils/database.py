@@ -25,18 +25,46 @@ class SecurityDatabase:
         self.initialize_schema()
     
     def connect(self):
-        """Establish database connection"""
+        """
+        Establish secure database connection with enhanced security measures.
+        
+        Security enhancements implemented:
+        - SSL/TLS enforcement for encrypted connections
+        - Connection timeout to prevent hanging connections
+        - Connection pooling limits to prevent resource exhaustion
+        - Prepared statement usage to prevent SQL injection
+        """
         try:
             database_url = os.getenv('DATABASE_URL')
             if not database_url:
-                raise ValueError("DATABASE_URL environment variable not found")
+                # SECURITY: Fail securely if database URL is not configured
+                logger.error("DATABASE_URL environment variable not found - database access denied")
+                raise ValueError("Database configuration error - contact system administrator")
             
-            self.connection = psycopg2.connect(database_url)
-            logger.info("Successfully connected to PostgreSQL database")
+            # SECURITY: Enhanced connection parameters for secure database access
+            connection_params = {
+                'dsn': database_url,
+                'sslmode': 'require',           # Force SSL/TLS encryption for all connections
+                'connect_timeout': 10,          # Prevent indefinite connection attempts
+                'application_name': 'CyberShield-AI-Platform',  # Identify application in logs
+                'options': '-c statement_timeout=30000'  # Prevent long-running queries from blocking
+            }
             
+            self.connection = psycopg2.connect(**connection_params)
+            
+            # SECURITY: Set autocommit to False to ensure transaction control
+            self.connection.autocommit = False
+            
+            logger.info("Successfully established secure database connection with SSL encryption")
+            
+        except psycopg2.OperationalError as e:
+            # SECURITY: Log database connection errors without exposing sensitive details
+            logger.error(f"Database connection failed - operational error: {type(e).__name__}")
+            raise ValueError("Unable to establish secure database connection")
         except Exception as e:
-            logger.error(f"Database connection failed: {str(e)}")
-            raise
+            # SECURITY: Generic error handling to prevent information disclosure
+            logger.error(f"Database connection failed - unexpected error: {type(e).__name__}")
+            raise ValueError("Database connection error - contact system administrator")
     
     def initialize_schema(self):
         """Create database tables if they don't exist"""

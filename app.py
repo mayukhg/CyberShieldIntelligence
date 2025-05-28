@@ -26,7 +26,7 @@ from modules import threat_detection, anomaly_detection, network_analysis
 from modules import user_behavior, incident_management, threat_intelligence, wiz_integration, threat_timeline, security_awareness, security_chatbot, deep_learning_detection
 
 # Import utility modules for shared infrastructure and UI components
-from utils import data_processor, alerts, ml_models, rule_engine, database, ui_themes
+from utils import data_processor, alerts, ml_models, rule_engine, database, ui_themes, security_validator
 
 # Configure Streamlit page with cybersecurity branding and optimal layout
 st.set_page_config(

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357abd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#28a745;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e7e34;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc3545;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c82333;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fd7e14;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8690b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="3" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="1000" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#343a40">
+    CyberShield AI Platform - Architecture &amp; Data Flow
+  </text>
+  
+  <!-- External Data Sources Layer -->
+  <rect x="50" y="70" width="1300" height="120" fill="#e9ecef" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="95" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">External Data Sources</text>
+  
+  <!-- Wiz Integration -->
+  <rect x="80" y="110" width="120" height="60" fill="url(#grad2)" stroke="#28a745" stroke-width="2" rx="5"/>
+  <text x="140" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Wiz Security</text>
+  <text x="140" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Platform</text>
+  
+  <!-- Threat Intelligence -->
+  <rect x="220" y="110" width="120" height="60" fill="url(#grad3)" stroke="#dc3545" stroke-width="2" rx="5"/>
+  <text x="280" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Threat Intel</text>
+  <text x="280" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Feeds</text>
+  
+  <!-- Network Traffic -->
+  <rect x="360" y="110" width="120" height="60" fill="url(#grad1)" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="420" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Network</text>
+  <text x="420" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Traffic</text>
+  
+  <!-- User Behavior -->
+  <rect x="500" y="110" width="120" height="60" fill="url(#grad4)" stroke="#fd7e14" stroke-width="2" rx="5"/>
+  <text x="560" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">User</text>
+  <text x="560" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Behavior</text>
+  
+  <!-- OpenAI API -->
+  <rect x="640" y="110" width="120" height="60" fill="#6f42c1" stroke="#6f42c1" stroke-width="2" rx="5"/>
+  <text x="700" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">OpenAI</text>
+  <text x="700" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">GPT-4o</text>
+  
+  <!-- Security Events -->
+  <rect x="780" y="110" width="120" height="60" fill="#20c997" stroke="#20c997" stroke-width="2" rx="5"/>
+  <text x="840" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Security</text>
+  <text x="840" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Events</text>
+  
+  <!-- System Logs -->
+  <rect x="920" y="110" width="120" height="60" fill="#6c757d" stroke="#6c757d" stroke-width="2" rx="5"/>
+  <text x="980" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">System</text>
+  <text x="980" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Logs</text>
+  
+  <!-- Compliance Data -->
+  <rect x="1060" y="110" width="120" height="60" fill="#e83e8c" stroke="#e83e8c" stroke-width="2" rx="5"/>
+  <text x="1120" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Compliance</text>
+  <text x="1120" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Data</text>
+  
+  <!-- Data Arrows from sources to processing -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6c757d"/>
+    </marker>
+  </defs>
+  
+  <!-- Arrows from sources to data ingestion -->
+  <line x1="140" y1="170" x2="140" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="280" y1="170" x2="280" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="420" y1="170" x2="420" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="560" y1="170" x2="560" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="170" x2="700" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="840" y1="170" x2="840" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="980" y1="170" x2="980" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="1120" y1="170" x2="1120" y2="210" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Data Ingestion Layer -->
+  <rect x="50" y="220" width="1300" height="80" fill="#dee2e6" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="245" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">Data Ingestion &amp; Processing Layer</text>
+  
+  <!-- Data Processor -->
+  <rect x="100" y="260" width="200" height="30" fill="#17a2b8" stroke="#17a2b8" stroke-width="1" rx="5"/>
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Real-time Data Processing</text>
+  
+  <!-- Event Correlation -->
+  <rect x="350" y="260" width="200" height="30" fill="#ffc107" stroke="#ffc107" stroke-width="1" rx="5"/>
+  <text x="450" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="black">Event Correlation Engine</text>
+  
+  <!-- Data Normalization -->
+  <rect x="600" y="260" width="200" height="30" fill="#6610f2" stroke="#6610f2" stroke-width="1" rx="5"/>
+  <text x="700" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Data Normalization</text>
+  
+  <!-- Quality Control -->
+  <rect x="850" y="260" width="200" height="30" fill="#fd7e14" stroke="#fd7e14" stroke-width="1" rx="5"/>
+  <text x="950" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Data Quality Control</text>
+  
+  <!-- Arrow to AI/ML layer -->
+  <line x1="700" y1="300" x2="700" y2="330" stroke="#6c757d" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- AI/ML Processing Layer -->
+  <rect x="50" y="340" width="1300" height="120" fill="#f1f3f4" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="365" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">AI/ML Processing Engine</text>
+  
+  <!-- Deep Learning Detection -->
+  <rect x="80" y="380" width="150" height="60" fill="url(#grad3)" stroke="#dc3545" stroke-width="2" rx="5"/>
+  <text x="155" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Deep Learning</text>
+  <text x="155" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Threat Detection</text>
+  <text x="155" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Neural Networks</text>
+  
+  <!-- Anomaly Detection -->
+  <rect x="250" y="380" width="150" height="60" fill="url(#grad4)" stroke="#fd7e14" stroke-width="2" rx="5"/>
+  <text x="325" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Anomaly</text>
+  <text x="325" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Detection</text>
+  <text x="325" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Isolation Forest</text>
+  
+  <!-- Behavioral Analysis -->
+  <rect x="420" y="380" width="150" height="60" fill="url(#grad2)" stroke="#28a745" stroke-width="2" rx="5"/>
+  <text x="495" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Behavioral</text>
+  <text x="495" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Analysis</text>
+  <text x="495" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">SVM Models</text>
+  
+  <!-- Threat Classification -->
+  <rect x="590" y="380" width="150" height="60" fill="url(#grad1)" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="665" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Threat</text>
+  <text x="665" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Classification</text>
+  <text x="665" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Random Forest</text>
+  
+  <!-- AI Assistant -->
+  <rect x="760" y="380" width="150" height="60" fill="#6f42c1" stroke="#6f42c1" stroke-width="2" rx="5"/>
+  <text x="835" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">AI Security</text>
+  <text x="835" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Assistant</text>
+  <text x="835" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">OpenAI GPT-4o</text>
+  
+  <!-- Pattern Recognition -->
+  <rect x="930" y="380" width="150" height="60" fill="#20c997" stroke="#20c997" stroke-width="2" rx="5"/>
+  <text x="1005" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Pattern</text>
+  <text x="1005" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Recognition</text>
+  <text x="1005" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Ensemble Methods</text>
+  
+  <!-- Arrow to database -->
+  <line x1="700" y1="460" x2="700" y2="490" stroke="#6c757d" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- Database Layer -->
+  <rect x="50" y="500" width="1300" height="80" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="525" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1976d2">Data Storage &amp; Management Layer</text>
+  
+  <!-- PostgreSQL Database -->
+  <rect x="200" y="540" width="200" height="30" fill="#336791" stroke="#336791" stroke-width="1" rx="5"/>
+  <text x="300" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">PostgreSQL Database</text>
+  
+  <!-- ML Models Storage -->
+  <rect x="450" y="540" width="200" height="30" fill="#ff6b6b" stroke="#ff6b6b" stroke-width="1" rx="5"/>
+  <text x="550" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">ML Models Storage</text>
+  
+  <!-- Cache Layer -->
+  <rect x="700" y="540" width="200" height="30" fill="#4ecdc4" stroke="#4ecdc4" stroke-width="1" rx="5"/>
+  <text x="800" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Redis Cache Layer</text>
+  
+  <!-- Arrow to application layer -->
+  <line x1="700" y1="580" x2="700" y2="610" stroke="#6c757d" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- Application Logic Layer -->
+  <rect x="50" y="620" width="1300" height="120" fill="#fff3cd" stroke="#856404" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="645" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#856404">Security Operations Modules</text>
+  
+  <!-- Threat Detection -->
+  <rect x="80" y="665" width="120" height="50" fill="url(#grad3)" stroke="#dc3545" stroke-width="1" rx="5"/>
+  <text x="140" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Threat</text>
+  <text x="140" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Detection</text>
+  
+  <!-- Incident Management -->
+  <rect x="220" y="665" width="120" height="50" fill="url(#grad4)" stroke="#fd7e14" stroke-width="1" rx="5"/>
+  <text x="280" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Incident</text>
+  <text x="280" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Management</text>
+  
+  <!-- Network Analysis -->
+  <rect x="360" y="665" width="120" height="50" fill="url(#grad1)" stroke="#4a90e2" stroke-width="1" rx="5"/>
+  <text x="420" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Network</text>
+  <text x="420" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Analysis</text>
+  
+  <!-- User Behavior -->
+  <rect x="500" y="665" width="120" height="50" fill="url(#grad2)" stroke="#28a745" stroke-width="1" rx="5"/>
+  <text x="560" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">User</text>
+  <text x="560" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Behavior</text>
+  
+  <!-- Threat Intelligence -->
+  <rect x="640" y="665" width="120" height="50" fill="#6f42c1" stroke="#6f42c1" stroke-width="1" rx="5"/>
+  <text x="700" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Threat</text>
+  <text x="700" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Intelligence</text>
+  
+  <!-- Security Awareness -->
+  <rect x="780" y="665" width="120" height="50" fill="#20c997" stroke="#20c997" stroke-width="1" rx="5"/>
+  <text x="840" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Security</text>
+  <text x="840" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Awareness</text>
+  
+  <!-- Timeline -->
+  <rect x="920" y="665" width="120" height="50" fill="#e83e8c" stroke="#e83e8c" stroke-width="1" rx="5"/>
+  <text x="980" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Threat</text>
+  <text x="980" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Timeline</text>
+  
+  <!-- Wiz Integration -->
+  <rect x="1060" y="665" width="120" height="50" fill="#6c757d" stroke="#6c757d" stroke-width="1" rx="5"/>
+  <text x="1120" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Wiz</text>
+  <text x="1120" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Integration</text>
+  
+  <!-- Arrow to UI layer -->
+  <line x1="700" y1="740" x2="700" y2="770" stroke="#6c757d" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- User Interface Layer -->
+  <rect x="50" y="780" width="1300" height="120" fill="#d1ecf1" stroke="#0c5460" stroke-width="2" rx="10" filter="url(#shadow)"/>
+  <text x="70" y="805" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0c5460">Adaptive User Interface Layer</text>
+  
+  <!-- Adaptive Dashboard -->
+  <rect x="100" y="820" width="180" height="60" fill="url(#grad2)" stroke="#28a745" stroke-width="2" rx="5"/>
+  <text x="190" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Adaptive Dashboard</text>
+  <text x="190" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Dynamic Color Themes</text>
+  <text x="190" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Real-time Updates</text>
+  
+  <!-- Interactive Timeline -->
+  <rect x="300" y="820" width="180" height="60" fill="url(#grad1)" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="390" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Interactive Timeline</text>
+  <text x="390" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Micro-interactions</text>
+  <text x="390" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Event Correlation</text>
+  
+  <!-- Security Training -->
+  <rect x="500" y="820" width="180" height="60" fill="url(#grad4)" stroke="#fd7e14" stroke-width="2" rx="5"/>
+  <text x="590" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Gamified Training</text>
+  <text x="590" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">XP &amp; Achievements</text>
+  <text x="590" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Leaderboards</text>
+  
+  <!-- AI Chatbot -->
+  <rect x="700" y="820" width="180" height="60" fill="#6f42c1" stroke="#6f42c1" stroke-width="2" rx="5"/>
+  <text x="790" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">AI Security Assistant</text>
+  <text x="790" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Natural Language</text>
+  <text x="790" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Recommendations</text>
+  
+  <!-- Alert System -->
+  <rect x="900" y="820" width="180" height="60" fill="url(#grad3)" stroke="#dc3545" stroke-width="2" rx="5"/>
+  <text x="990" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Alert System</text>
+  <text x="990" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Pulsing Critical Alerts</text>
+  <text x="990" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Multi-severity</text>
+  
+  <!-- Data Flow Indicators -->
+  <text x="70" y="930" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#495057">Data Flow Legend:</text>
+  
+  <!-- Real-time Flow -->
+  <line x1="100" y1="945" x2="150" y2="945" stroke="#28a745" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <text x="160" y="950" font-family="Arial, sans-serif" font-size="11" fill="#495057">Real-time Data Processing (&lt;5s latency)</text>
+  
+  <!-- Batch Flow -->
+  <line x1="100" y1="965" x2="150" y2="965" stroke="#fd7e14" stroke-width="4" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+  <text x="160" y="970" font-family="Arial, sans-serif" font-size="11" fill="#495057">Batch Processing (ML Model Training)</text>
+  
+  <!-- User Interaction -->
+  <line x1="350" y1="945" x2="400" y2="945" stroke="#4a90e2" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <text x="410" y="950" font-family="Arial, sans-serif" font-size="11" fill="#495057">User Interactions &amp; Feedback</text>
+  
+  <!-- API Calls -->
+  <line x1="350" y1="965" x2="400" y2="965" stroke="#6f42c1" stroke-width="4" stroke-dasharray="10,5" marker-end="url(#arrowhead)"/>
+  <text x="410" y="970" font-family="Arial, sans-serif" font-size="11" fill="#495057">External API Integrations</text>
+  
+  <!-- Performance Metrics -->
+  <rect x="900" y="930" width="450" height="50" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+  <text x="920" y="950" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#495057">Key Performance Metrics:</text>
+  <text x="920" y="965" font-family="Arial, sans-serif" font-size="10" fill="#495057">• 99.9% Uptime • &lt;100ms Response Time • 95%+ Threat Detection Accuracy</text>
+  
+</svg>
